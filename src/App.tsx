@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Items from "./pages/Items";
+import PostPage from "./pages/PostPage";
+import Posts from "./pages/Posts";
 
 function App() {
+  const routerPaths: Array<{ path: string; element: JSX.Element }> = [
+    { path: "/", element: <Home /> },
+    { path: "/posts", element: <Posts /> },
+    { path: "/post/:id", element: <PostPage /> },
+    { path: "/items", element: <Items /> },
+  ];
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Routes>
+        {routerPaths.map((route) => (
+          <Route path={route.path} element={route.element} />
+        ))}
+      </Routes>
     </div>
   );
 }
